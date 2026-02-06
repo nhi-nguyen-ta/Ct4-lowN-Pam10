@@ -11,3 +11,6 @@ Given in input a set of bacterial proteomes, the programs will perform the follo
 ### Pre-required software
 - [HMMER](http://hmmer.org) (v3.4)
 - [Kofamascan](https://www.genome.jp/ftp/tools/kofam_scan) (v1.3.0)
+
+
+> Add some execution examples...
