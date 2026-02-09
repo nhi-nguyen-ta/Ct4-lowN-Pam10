@@ -1,6 +1,6 @@
 # Ct4-lowN-Pam10
 
-This repository contains the programs to reproduce the analyses described in <manuscript-link>.  
+This repository contains the programs to reproduce the analyses described in [manuscript-link].  
 
 > This software was tested on [Linux](https://en.wikipedia.org/wiki/Linux), but it should also work on [Apple MacOS](https://en.wikipedia.org/wiki/MacOS) and Microsoft Windows, using [Windows Subsystem for Linux (WSL)](https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux).
 
