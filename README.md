@@ -14,7 +14,7 @@ Given in input a set of bacterial proteomes, the programs will perform the follo
 - [Kofamscan profiles](https://www.genome.jp/ftp/db/kofam/) (We used the version from 2025-06-01)
 - [Kofamscan ko_list](https://www.genome.jp/ftp/db/kofam/) (We used the version from 2025-06-01)
 
-You can find a copy of the version of Kofamscan that we used in __.packages/kofam_scan-1.3.0.tar.gz__
+You can find a copy of the version of Kofamscan that we used in `.packages/kofam_scan-1.3.0.tar.gz`
 
 NOTE: using a different release of the profiles DB should not give very different results, although we strongly suggest use the same release we use for maximum reproducibility.  
 
