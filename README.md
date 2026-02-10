@@ -27,3 +27,13 @@ There are different ways to setup a virtual environment:
 - Using Conda/Anaconda
 - Using [Astral uv](https://docs.astral.sh/uv/)  
 Due to its speed and flexibility, we use uv from Astral.  
+
+
+# Main commands to execute
+
+#### Proteome annotation
+ python ~/work-repos/genome_data_analysis/src/hiruma-proteomes.py -i ~/Desktop/hiruma-annotation-final-test/input/ -o ~/Desktop/hiruma-annotation-final-test -k ~/Desktop/test-kofamscan/kofam_scan-1.3.0/exec_annotation -p ~/Desktop/test-kofamscan/kofamscan/kofamdb/profiles/prokaryote.hal -ko ~/Desktop/test-kofamscan/kofamscan/kofamdb/ko_list --threads 10 --write-logs --file-extension fasta
+
+#### generate heatmaps
+python ~/work-repos/genome_data_analysis/src/hiruma-plot-kegg-annotation-heatmaps.py --brite-list ~/Desktop/hiruma-annotation-final-test/kofam-annotation/brite_counts/master.brite.list.tsv --output-dir ~/Desktop/hiruma-annotation-final-test/figures --strain-names-mapping ~/Desktop/hiruma-annotation-final-test/RAST_based_strain_names_with_extensions.tsv --threads 10 --write-logs --file-extension svg
+
