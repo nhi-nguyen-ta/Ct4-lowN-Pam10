@@ -14,7 +14,7 @@ from rich.logging import RichHandler
 from typing_extensions import TextIO
 import argparse
 
-import genome_data_analysis as gda
+import ct4_lown_pam10 as ct
 
 # Set the logger
 logger = logging.getLogger(__name__)
@@ -269,11 +269,11 @@ def main():
     # proteomes_dir: Path = Path(args.input_proteomes)
     # Create the output directories
     outdir: Path = Path(args.output_dir)
-    gda.systools.makedir(outdir)
+    ct.systools.makedir(outdir)
     datapoints_dir: Path = outdir.joinpath("datapoints")
-    gda.systools.makedir(datapoints_dir)
+    ct.systools.makedir(datapoints_dir)
     plots_dir: Path = outdir.joinpath("plots")
-    gda.systools.makedir(plots_dir)
+    ct.systools.makedir(plots_dir)
     strain_names_mapping_tbl: Path = Path(args.strain_names_mapping)
     ext: str = args.file_extension
     threads: uint32 = uint32(args.threads)
