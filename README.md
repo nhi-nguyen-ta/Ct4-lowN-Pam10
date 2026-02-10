@@ -45,12 +45,25 @@ Follow these steps to setup the environment:
 
 If everything went well, your terminal should show `(ct4-lown-pam10)` indicating that the environment is active.
 
+When showing the commands to be executed we assume the following:  
+- you are in the project directory
+- kofamscan is installed and working your system
+- you have downloaded and uncompressed the kofam hmm profiles
 
-# Main commands to execute
+#### Proteome annotation  
+ python ./src/annotate-proteomes.py -i <directory_with_input_proteomes> -o <annotation_output_directory> -k <path-to-kofamscan/exec_annotation> -p <path-to-profiles-dir/prokaryote.hal> -ko <path-to-profiles-ko_list> --threads 10 --write-logs --file-extension fasta
 
-#### Proteome annotation
- python ~/work-repos/genome_data_analysis/src/hiruma-proteomes.py -i ~/Desktop/hiruma-annotation-final-test/input/ -o ~/Desktop/hiruma-annotation-final-test -k ~/Desktop/test-kofamscan/kofam_scan-1.3.0/exec_annotation -p ~/Desktop/test-kofamscan/kofamscan/kofamdb/profiles/prokaryote.hal -ko ~/Desktop/test-kofamscan/kofamscan/kofamdb/ko_list --threads 10 --write-logs --file-extension fasta
+Please adjust the parameters according to your system.
 
-#### generate heatmaps
-python ~/work-repos/genome_data_analysis/src/hiruma-plot-kegg-annotation-heatmaps.py --brite-list ~/Desktop/hiruma-annotation-final-test/kofam-annotation/brite_counts/master.brite.list.tsv --output-dir ~/Desktop/hiruma-annotation-final-test/figures --strain-names-mapping ~/Desktop/hiruma-annotation-final-test/RAST_based_strain_names_with_extensions.tsv --threads 10 --write-logs --file-extension svg
+Note that kofamscan is fairly slow. In our system it took 40 minutes to annotate 7 proteomes, using 10 cpu cores.  
+After the execution is completed, the annotation file will be in the output directory you chose in the previous command.  
+Additionally, the scripts download KO files using the KEGG api, which can be time consuming.  
 
+Aside from runnning kofamscan annotation, the program will extract BRITE information for each matched KO object.  
+The information are recapitulated in a file called `master.brite.list.tsv` which can be found in the output directory. This file is required to generate the heatmaps.
+
+
+#### generate heatmaps  
+python ./src/plot-kegg-annotation-heatmaps.py --brite-list <annotation_output_directory/kofam-annotation/brite_counts/master.brite.list.tsv> --output-dir <output_figures> --strain-names-mapping ./data/RAST_based_strain_names_with_extensions.tsv --threads 10 --write-logs --file-extension svg
+
+At the end of the execution, you can find the generated heatmaps in the output directory that you previously chose.
