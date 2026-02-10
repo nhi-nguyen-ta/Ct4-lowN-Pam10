@@ -28,6 +28,22 @@ There are different ways to setup a virtual environment:
 - Using [Astral uv](https://docs.astral.sh/uv/)  
 Due to its speed and flexibility, we use uv from Astral.  
 
+The required python version, and packages are detailed in the file `pyproject.toml`, in the main directory of this repository.
+
+Please install `uv` following the following the instruction for your operating system (OS)
+
+Follow these steps to setup the environment:
+- `Clone the git repository`
+  - git clone https://github.com/nhi-nguyen-ta/Ct4-lowN-Pam10.git
+- `Enter the project directory`
+  - cd Ct4-lowN-Pam10
+- `Create the environment using uv`
+  - uv sync
+- `Activate the python environment (we assume you are using a bash shell)`
+  - source .venv/bin/activate
+
+If everything went well, your terminal should show `(ct4-lown-pam10)` indicating that the environment is active.
+
 
 # Main commands to execute
 
