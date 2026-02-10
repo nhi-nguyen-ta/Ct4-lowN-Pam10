@@ -15,7 +15,7 @@ from shutil import which
 from bioservices import KEGG
 from numpy import float64, uint32
 
-from genome_data_analysis import systools
+from ct4_lown_pam10 import systools
 
 # Logger that will be used in this module
 # It is child of the root logger and

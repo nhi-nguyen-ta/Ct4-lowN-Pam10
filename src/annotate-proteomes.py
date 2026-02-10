@@ -11,7 +11,7 @@ from rich.logging import RichHandler
 from typing_extensions import TextIO
 import argparse
 
-import genome_data_analysis as gda
+import ct4_lown_pam10 as ct
 
 # Set the logger
 logger = logging.getLogger(__name__)
@@ -70,7 +70,7 @@ def extract_brite_hierarchies(annotated_file_paths: list[Path], kegg_raw_dir: Pa
         # base names have the following format:
         # <bacteria>.<id>.kofam.detail-tsv.tsv
         prefix = os.path.basename(p).split(".kofam.", maxsplit=1)[0]
-        brite_list_path = gda.annotation.extract_brite_info(kofam_raw=p, kegg_raw_dir=kegg_raw_dir, kegg_json_dir=kegg_json_dir, outdir=outdir, kegg_db_abbrev="ko", kofam_fmt=kofam_fmt, best_hit_only=best_hit_only, exclude_uncomplete_brite=exclude_uncomplete_brite, overwrite_kegg_obj=overwrite_kegg_obj, waittime=waittime)
+        brite_list_path = ct.annotation.extract_brite_info(kofam_raw=p, kegg_raw_dir=kegg_raw_dir, kegg_json_dir=kegg_json_dir, outdir=outdir, kegg_db_abbrev="ko", kofam_fmt=kofam_fmt, best_hit_only=best_hit_only, exclude_uncomplete_brite=exclude_uncomplete_brite, overwrite_kegg_obj=overwrite_kegg_obj, waittime=waittime)
 
         # add the path to the list
         brite_info_files.append(brite_list_path)
@@ -160,21 +160,21 @@ def main():
     # kolist: Path = kofamdb_dir.joinpath("ko_list")
     kofam_outfmt: str = "detail-tsv"
     # prokaryote_profiles: Path = kofamdb_dir.joinpath("profiles/prokaryote.hal")
-    proteome_paths: list[Path] = gda.systools.load_input_paths(proteomes_dir, fmt=ext)
+    proteome_paths: list[Path] = ct.systools.load_input_paths(proteomes_dir, fmt=ext)
     # KOfamScan ANNOTATION
     for p in proteome_paths:
         # print(p)
         bname = os.path.basename(p).replace(".faa", "")
         bname = f"{bname}.kofam.{kofam_outfmt}"
         # print(bname)
-        gda.annotation.kofamscan_annotate(p, outdir=annotation_dir, kofam_path=kofam_path, profiles=kofam_profiles, kolist=ko_list, outprefix=bname, outfmt=kofam_outfmt, threads=threads, writelog=writelog)
+        ct.annotation.kofamscan_annotate(p, outdir=annotation_dir, kofam_path=kofam_path, profiles=kofam_profiles, kolist=ko_list, outprefix=bname, outfmt=kofam_outfmt, threads=threads, writelog=writelog)
         # break
     print("Kofam protein annotation completed successfully.")
 
     # Filter to only keep the significant hits
     kdecoder_input_dir: Path = annotation_dir.joinpath("kegg_decoder")
-    gda.systools.makedir(kdecoder_input_dir)
-    annotated_file_paths: list[Path] = gda.systools.load_input_paths(annotation_dir, fmt="tsv")
+    ct.systools.makedir(kdecoder_input_dir)
+    annotated_file_paths: list[Path] = ct.systools.load_input_paths(annotation_dir, fmt="tsv")
     prefix: str = ""
     kdecoder_input: Path = kdecoder_input_dir.joinpath("kdecoder.input.tsv")
     # recreate the file if needed
@@ -188,7 +188,7 @@ def main():
         # <bacteria>.<id>.kofam.detail-tsv.tsv
         prefix = os.path.basename(p).split(".kofam.", maxsplit=1)[0]
         # Extract kegg ids
-        gda.annotation.kofamscan2keggdecoder(p, outpath = kdecoder_input, kofam_fmt = "detail-tsv", prefix = prefix, best_hit_only = True, append = True)
+        ct.annotation.kofamscan2keggdecoder(p, outpath = kdecoder_input, kofam_fmt = "detail-tsv", prefix = prefix, best_hit_only = True, append = True)
         # Run KEGG-decoder
         # NOTE: KEGG-decoder requires its own environment be loaded in advance
         # The example command would be the following:
@@ -197,9 +197,9 @@ def main():
     # Retrieve KEGG files and convert them to JSON
     klist_file: Path = kdecoder_input_dir.joinpath("kegg_ids.txt")
     outdir_kegg: Path = kdecoder_input_dir.joinpath("raw")
-    gda.systools.makedir(outdir_kegg)
+    ct.systools.makedir(outdir_kegg)
     outdir_json: Path = kdecoder_input_dir.joinpath("json")
-    gda.systools.makedir(outdir_json)
+    ct.systools.makedir(outdir_json)
 
     # Create file containing only the ko_ids
     df: pd.DataFrame = pd.read_csv(kdecoder_input, sep="\t", header=None)
