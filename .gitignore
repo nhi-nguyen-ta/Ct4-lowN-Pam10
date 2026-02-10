@@ -1,0 +1,2 @@
+# Exclude lock file from uv package manager
+uv.lock
