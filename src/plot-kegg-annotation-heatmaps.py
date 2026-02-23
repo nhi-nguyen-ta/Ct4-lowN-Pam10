@@ -216,7 +216,7 @@ def plot_heatmap(tbl_file: Path, plots_dir: Path, excluded_sp: list[str], rename
         outfname = f"{outfname}.hits.{fmt}"
     outpath: Path = plots_dir.joinpath(outfname)
     # Generate the plot
-    heatmap = sns.heatmap(datapoints, xticklabels=datapoints.columns, yticklabels=df["Brite-lev3"], annot=False, vmin=0, cmap=sns.cm.rocket_r)
+    heatmap = sns.heatmap(datapoints, xticklabels=datapoints.columns, yticklabels=df["Brite-lev3"], annot=False, vmin=0, cmap=sns.cm.rocket)
     # Set title, x and y labels
     heatmap.set_title(plot_title)
     plt.xlabel("Species")
